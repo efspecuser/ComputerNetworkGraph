@@ -7,21 +7,8 @@ using Contracts;
 
 namespace ComputerNetworkGraph
 {
-    using System;
-
-    using System.Collections.Generic;
-
-
-
-    /// <summary>Represents a directed unweighted graph structure
-
-    /// </summary>
-
     public class Graph
     {
-        // Contains the child nodes for each vertex of the graph
-        // assuming that the vertices are numbered 0 ... Size-1
-
         public List<IVertex> Vertices { get; }
 
         public Graph()
@@ -42,6 +29,9 @@ namespace ComputerNetworkGraph
 
         public void AddEdge(IEdge edge)
         {
+            if (!IsEdgeValid(edge))
+                throw new ArgumentNullException();
+
             var source = edge.Source;
             var target = edge.Target;
             if (!this.Vertices.Contains(source)) this.Vertices.Add(source);
@@ -51,8 +41,13 @@ namespace ComputerNetworkGraph
             target.Edges.Add(edge);
         }
 
+        
+
         public void RemoveEdge(IEdge edge)
         {
+            if (!IsEdgeValid(edge))
+                throw new ArgumentNullException();
+
             if (!HasEdge(edge.Source, edge.Target)) return;
 
             edge.Source.Edges.Remove(edge);
@@ -116,6 +111,11 @@ namespace ComputerNetworkGraph
             }
 
             return connectedViaIncoming;
+        }
+
+        private static bool IsEdgeValid(IEdge edge)
+        {
+            return edge?.Source != null && edge.Target != null;
         }
     }
 }

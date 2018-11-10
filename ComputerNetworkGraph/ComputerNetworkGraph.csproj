@@ -55,8 +55,6 @@
     <Compile Include="Edge.cs" />
     <Compile Include="Graph.cs" />
     <Compile Include="ComputerGraphFactory.cs" />
-    <Compile Include="MockCompPairsRepoConnected.cs" />
-    <Compile Include="MockCompPairsRepoDisconnected.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Vertex.cs" />
